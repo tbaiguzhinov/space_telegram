@@ -1,9 +1,11 @@
 import telegram
 
-bot = telegram.Bot(token="5456681274:AAFa9ITxfuKFtHSt3bUT7ufGoz499YsJUx8")
+def post_photo(telegram_token, chat_id, file):
+    bot = telegram.Bot(token=telegram_token)
+    bot.send_photo(chat_id=chat_id, photo=open(file, 'rb'))
 
-my_text = "Че-то намутил, да-да-да"
-
+telegram_token = "5456681274:AAFa9ITxfuKFtHSt3bUT7ufGoz499YsJUx8"
 chat_id = -1001156275886
+file = "images/allsky_euve..jpg"
 
-bot.send_message(chat_id=chat_id, text=my_text)
+post_photo(telegram_token, chat_id, file)
