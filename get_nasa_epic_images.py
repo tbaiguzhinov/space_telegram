@@ -23,11 +23,16 @@ def get_nasa_epic_image(
         verify=False,
     )
     response.raise_for_status()
-    for photo in response.json():
-        photo_datetime = datetime.strptime(photo["date"], "%Y-%m-%d %H:%M:%S")
-        photo_name = photo["image"]
-        url = f"https://api.nasa.gov/EPIC/archive/natural/{photo_datetime.year}/{photo_datetime.month:02d}/{photo_datetime.day:02d}/png/{photo_name}.png"
-        download_and_save_image(url, folder, params=params)
+    photos = response.json()
+    for x in range(number_of_photos+1):
+        try:
+            photo = photos[x]
+            photo_datetime = datetime.strptime(photo["date"], "%Y-%m-%d %H:%M:%S")
+            photo_name = photo["image"]
+            url = f"https://api.nasa.gov/EPIC/archive/natural/{photo_datetime.year}/{photo_datetime.month:02d}/{photo_datetime.day:02d}/png/{photo_name}.png"
+            download_and_save_image(url, folder, params=params)
+        except IndexError:
+            break
 
 
 def main():
