@@ -20,7 +20,7 @@ def main():
         try:
             publish_image_to_telegram(
                 telegram_token=os.getenv("TELEGRAM_TOKEN"),
-                chat_id=-1001156275886,
+                chat_id=os.getenv("CHAT_ID"),
                 folder="images"
                 )
             time.sleep(int(os.getenv("SETBACK", default=4))*60*60)
