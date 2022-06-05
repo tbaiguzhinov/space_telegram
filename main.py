@@ -18,11 +18,13 @@ def main():
     load_dotenv()
     while True:
         try:
+            file = get_random_file(folder="images")
             publish_image_to_telegram(
                 telegram_token=os.getenv("TELEGRAM_TOKEN"),
                 chat_id=os.getenv("CHAT_ID"),
-                file_path=get_random_file(folder="images"),
+                file=file,
             )
+            os.remove(file)
             time.sleep(int(os.getenv("SETBACK", default=4))*60*60)
         except (IndexError, FileNotFoundError):
             logging.error("Фотографии отсутствуют")
