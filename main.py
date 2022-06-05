@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-from fetch_spacex_images import fetch_spacex_launch
-from get_nasa_epic_images import get_nasa_epic_image
-from get_nasa_picture_of_day import load_nasa_picture_of_day
+from load_spacex_images import load_spacex_launch
+from load_nasa_epic_images import load_nasa_epic_images
+from load_nasa_picture_of_day import load_nasa_picture_of_day
 from publish_image_to_telegram import publish_image_to_telegram, get_random_file
 
 
@@ -26,8 +26,8 @@ def main():
             time.sleep(int(os.getenv("SETBACK", default=4))*60*60)
         except (IndexError, FileNotFoundError):
             logging.error("Фотографии отсутствуют")
-            fetch_spacex_launch(folder="images")
-            get_nasa_epic_image(
+            load_spacex_launch(folder="images")
+            load_nasa_epic_images(
                 nasa_api_key=os.getenv("NASA_API_KEY"),
                 folder="images",
                 number_of_photos=5,

@@ -9,7 +9,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from download_and_save_image import download_and_save_image
 
 
-def fetch_spacex_launch(folder="images", launch_id=None):
+def load_spacex_launch(folder="images", launch_id=None):
     spacex_api_url = "https://api.spacexdata.com/v4/launches"
     if launch_id:
         spacex_api_url = urljoin(spacex_api_url, launch_id)
@@ -48,7 +48,7 @@ def main():
         type=str,
     )
     args = parser.parse_args()
-    fetch_spacex_launch(folder=args.folder, launch_id=args.launch_id)
+    load_spacex_launch(folder=args.folder, launch_id=args.launch_id)
 
 if __name__ == "__main__":
     main()

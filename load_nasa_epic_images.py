@@ -9,7 +9,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from download_and_save_image import download_and_save_image
 
 
-def get_nasa_epic_image(
+def load_nasa_epic_images(
         nasa_api_key=None,
         folder="images",
         number_of_photos=5,
@@ -53,7 +53,7 @@ def main():
         type=int,
     )
     args = parser.parse_args()
-    get_nasa_epic_image(
+    load_nasa_epic_images(
         nasa_api_key=args.nasa_api_key,
         folder=args.folder,
         number_of_photos=args.number_of_photos,
