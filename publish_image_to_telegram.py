@@ -18,7 +18,7 @@ def compress_image_if_big(file_path):
         length, width = image.size
         image = image.resize((int(length*0.9), int(width*0.9)))
     image.save(file_path)
- 
+
 
 def get_random_file(folder):
     """

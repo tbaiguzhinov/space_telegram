@@ -21,8 +21,8 @@ def main():
             publish_image_to_telegram(
                 telegram_token=os.getenv("TELEGRAM_TOKEN"),
                 chat_id=os.getenv("CHAT_ID"),
-                folder="images"
-                )
+                folder="images",
+            )
             time.sleep(int(os.getenv("SETBACK", default=4))*60*60)
         except (IndexError, FileNotFoundError):
             logging.error("Фотографии отсутствуют")
@@ -31,12 +31,12 @@ def main():
                 nasa_api_key=os.getenv("NASA_API_KEY"),
                 folder="images",
                 number_of_photos=5,
-                )
+            )
             load_nasa_picture_of_day(
                 nasa_api_key=os.getenv("NASA_API_KEY"),
                 folder="images",
                 number_of_photos=5,
-                )
+            )
 
 
 if __name__ == "__main__":

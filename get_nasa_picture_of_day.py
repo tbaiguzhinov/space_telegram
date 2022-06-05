@@ -21,7 +21,7 @@ def load_nasa_picture_of_day(
         "https://api.nasa.gov/planetary/apod",
         params=params,
         verify=False,
-        )
+    )
     response.raise_for_status()
     for item in response.json():
         download_and_save_image(item["url"], folder)
@@ -32,29 +32,28 @@ def main():
     parser.add_argument(
         "nasa_api_key",
         help="API ключ от api.nasa.gov",
-        type=str
-        )
+        type=str,
+    )
     parser.add_argument(
         "folder",
         nargs='?',
         default="images",
         help="Название папки для сохранения фото",
-        type=str
-        )
+        type=str,
+    )
     parser.add_argument(
         "number_of_photos",
         nargs='?',
         default=5,
         help="Количество запрашиваемых фотографий",
-        type=int
-        )
+        type=int,
+    )
     args = parser.parse_args()
     load_nasa_picture_of_day(
         nasa_api_key=args.nasa_api_key,
         folder=args.folder,
-        number_of_photos=args.number_of_photos
-        )
+        number_of_photos=args.number_of_photos,
+    )
 
 if __name__ == "__main__":
     main()
-    

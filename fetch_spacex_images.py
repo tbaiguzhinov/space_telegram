@@ -15,7 +15,8 @@ def fetch_spacex_launch(folder="images", launch_id=None):
         spacex_api_url = urljoin(spacex_api_url, launch_id)
     response = requests.get(
         spacex_api_url,
-        verify=False)
+        verify=False,
+    )
     response.raise_for_status()
     for item in response.json()[::-1]:
         if item["links"]["patch"]["large"]:
@@ -31,15 +32,15 @@ def main():
         nargs='?',
         default="images",
         help="Название папки для сохранения фото",
-        type=str
-        )
+        type=str,
+    )
     parser.add_argument(
         "launch_id",
         nargs='?',
         default=None,
         help="ID запуска SpaceX",
-        type=str
-        )
+        type=str,
+    )
     args = parser.parse_args()
     fetch_spacex_launch(folder=args.folder, launch_id=args.launch_id)
 

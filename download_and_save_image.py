@@ -11,8 +11,8 @@ def download_and_save_image(url, folder, params=None):
     response = requests.get(
         url,
         params=params,
-        verify=False
-        )
+        verify=False,
+    )
     response.raise_for_status()
     url_path = urlparse(unquote(url)).path
     parent, full_file_name = os.path.split(url_path)
@@ -20,6 +20,6 @@ def download_and_save_image(url, folder, params=None):
     os.makedirs(folder, exist_ok=True)
     with open(
             os.path.join(folder, f"{filename}{extension}"),
-            "wb"
-            ) as file:
+            mode="wb",
+    ) as file:
         file.write(response.content)
