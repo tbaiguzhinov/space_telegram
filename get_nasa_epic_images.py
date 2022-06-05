@@ -46,14 +46,14 @@ def main():
         type=str,
     )
     parser.add_argument(
-        "folder",
+        "--folder",
         nargs='?',
         default="images",
         help="Название папки для сохранения фото",
         type=str,
     )
     parser.add_argument(
-        "number_of_photos",
+        "--number_of_photos",
         nargs='?',
         default=5,
         help="Количество запрашиваемых фотографий",

@@ -18,24 +18,30 @@ def fetch_spacex_launch(folder="images", launch_id=None):
         verify=False,
     )
     response.raise_for_status()
-    for item in response.json()[::-1]:
-        if item["links"]["patch"]["large"]:
-            link = item["links"]["patch"]["large"]
-            download_and_save_image(link, folder)
-            return
+    if launch_id and item["links"]["flickr"]["original"]:
+        links = item["links"]["flickr"]["loriginal"]
+    elif not launch_id:
+        for item in response.json()[::-1]:
+            if item["links"]["flickr"]["original"]:
+                links = item["links"]["flickr"]["original"]
+    else:
+        return
+    for link in links:
+        download_and_save_image(link, folder)
+
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "folder",
+        "--folder",
         nargs='?',
         default="images",
         help="Название папки для сохранения фото",
         type=str,
     )
     parser.add_argument(
-        "launch_id",
+        "--launch_id",
         nargs='?',
         default=None,
         help="ID запуска SpaceX",
