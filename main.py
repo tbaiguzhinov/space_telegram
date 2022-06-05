@@ -11,7 +11,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from fetch_spacex_images import fetch_spacex_launch
 from get_nasa_epic_images import get_nasa_epic_image
 from get_nasa_picture_of_day import load_nasa_picture_of_day
-from publish_image_to_telegram import publish_image_to_telegram
+from publish_image_to_telegram import publish_image_to_telegram, get_random_file
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
             publish_image_to_telegram(
                 telegram_token=os.getenv("TELEGRAM_TOKEN"),
                 chat_id=os.getenv("CHAT_ID"),
-                folder="images",
+                file_path=get_random_file(folder="images"),
             )
             time.sleep(int(os.getenv("SETBACK", default=4))*60*60)
         except (IndexError, FileNotFoundError):

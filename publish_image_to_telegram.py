@@ -29,9 +29,8 @@ def get_random_file(folder):
     return os.path.join(folder, random.choice(os.listdir(folder)))
 
 
-def publish_image_to_telegram(telegram_token, chat_id, folder):
-    file_path = get_random_file(folder)
-    compress_image_if_big(file_path)
+def publish_image_to_telegram(telegram_token, chat_id, file):
+    compress_image_if_big(file)
     bot = telegram.Bot(token=telegram_token)
-    bot.send_photo(chat_id=chat_id, photo=open(file_path, 'rb'))
-    os.remove(file_path)
+    bot.send_photo(chat_id=chat_id, photo=open(file, 'rb'))
+    os.remove(file)
