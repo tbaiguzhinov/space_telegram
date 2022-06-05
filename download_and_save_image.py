@@ -1,4 +1,3 @@
-from bz2 import compress
 import os
 from urllib.parse import unquote, urlparse
 
