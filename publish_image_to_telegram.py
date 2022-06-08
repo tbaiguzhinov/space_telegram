@@ -4,7 +4,6 @@ import random
 import telegram
 
 from PIL import Image
-from io import BytesIO
 
 
 def compress_image_if_big(file_path):
@@ -15,8 +14,8 @@ def compress_image_if_big(file_path):
     """
     image = Image.open(file_path)
     while len(image.tobytes()) >= 20971520:
-        length, width = image.size
-        image = image.resize((int(length*0.9), int(width*0.9)))
+        height, width = image.size
+        image = image.resize((int(height*0.9), int(width*0.9)))
     image.save(file_path)
 
 
