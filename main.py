@@ -16,26 +16,30 @@ from publish_image_to_telegram import publish_image_to_telegram, get_random_file
 
 def main():
     load_dotenv()
+    telegram_token = os.getenv("TELEGRAM_TOKEN")
+    chat_id = os.getenv("CHAT_ID")
+    setback = os.getenv("SETBACK")
+    nasa_api_key = os.getenv("NASA_API_KEY")
     while True:
         try:
             file_path = get_random_filepath(folder="images")
             publish_image_to_telegram(
-                telegram_token=os.getenv("TELEGRAM_TOKEN"),
-                chat_id=os.getenv("CHAT_ID"),
+                telegram_token=telegram_token,
+                chat_id=chat_id,
                 file_path=file_path,
             )
             os.remove(file_path)
-            time.sleep(int(os.getenv("SETBACK", default=4))*60*60)
+            time.sleep(int(setback, default=4))*60*60)
         except (IndexError, FileNotFoundError):
             logging.error("Фотографии отсутствуют")
             load_spacex_launch(folder="images")
             load_nasa_epic_images(
-                nasa_api_key=os.getenv("NASA_API_KEY"),
+                nasa_api_key=nasa_api_key,
                 folder="images",
                 number_of_photos=5,
             )
             load_nasa_picture_of_day(
-                nasa_api_key=os.getenv("NASA_API_KEY"),
+                nasa_api_key=nasa_api_key,
                 folder="images",
                 number_of_photos=5,
             )
