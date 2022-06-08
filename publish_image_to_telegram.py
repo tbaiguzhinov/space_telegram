@@ -19,7 +19,7 @@ def compress_image_if_big(file_path):
     image.save(file_path)
 
 
-def get_random_file(folder):
+def get_random_filepath(folder):
     """
     Возвращает случайный файл из заданной папки.
     Поднимает IndexError, если папка пуста
