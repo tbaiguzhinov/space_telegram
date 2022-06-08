@@ -31,4 +31,5 @@ def get_random_file(folder):
 def publish_image_to_telegram(telegram_token, chat_id, file):
     compress_image_if_big(file)
     bot = telegram.Bot(token=telegram_token)
-    bot.send_photo(chat_id=chat_id, photo=open(file, 'rb'))
+    with open(file, "rb") as photo:
+        bot.send_photo(chat_id=chat_id, photo=photo)
